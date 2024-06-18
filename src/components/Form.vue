@@ -10,19 +10,17 @@
         <v-text-field
           name="local"
           label="Local"
-          id="id"
           v-model="newItem.local"
         ></v-text-field>
         <v-text-field
           name="data"
           label="Data"
-          id="id"
+          type="date"
           v-model="newItem.data"
         ></v-text-field>
         <v-text-field
           name="valor"
           label="Valor"
-          id="id"
           v-model="newItem.valor"
         ></v-text-field>
         <v-checkbox label="Parcelado" v-model="parcelado"></v-checkbox>

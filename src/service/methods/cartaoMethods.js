@@ -1,14 +1,14 @@
 import { Cartao } from "../cartao";
 
 export const cartaoMethods = {
-  resetForm() {
-    this.newItem = {
+  resetForm(contexto) {
+    contexto.newItem = {
       responsavel: "",
       local: "",
       data: "",
       valor: 0,
     };
-    this.parcelado = false;
+    contexto.parcelado = false;
   },
   async cadastrar(contexto, newItem, parcelado) {
     if (parcelado) {
@@ -19,7 +19,7 @@ export const cartaoMethods = {
     try {
       await contexto.create(newItem);
       alert("Cadastro Realizado!");
-      location.reload();
+      this.resetForm(contexto);
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
       alert("Erro ao cadastrar item");

@@ -12,6 +12,11 @@ import {
 
 export const Cartao = {
   methods: {
+    formatDate(date) {
+      if (!date) return "";
+      const [year, month, day] = date.split("-");
+      return `${day}/${month}/${year}`;
+    },
     async getAll() {
       const snapShot = await getDocs(collection(db, "cartao"));
       const all = snapShot.docs.map((doc) => {
@@ -22,6 +27,10 @@ export const Cartao = {
     },
     async create(newItem) {
       try {
+        // Formatando a data para dd/MM/yyyy antes de enviar ao Firestore
+        if (newItem.data) {
+          newItem.data = this.formatDate(newItem.data);
+        }
         await addDoc(collection(db, "cartao"), newItem);
       } catch (error) {
         console.log("Error em src/service/cartao", error);

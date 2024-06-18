@@ -18,7 +18,7 @@
     </v-card-title>
 
     <v-divider></v-divider>
-    <v-data-table v-model:search="search" v-for="(user, indice) in cartao">
+    <v-data-table v-model:search="search" :items="cartao">
       <template v-slot:header.stock>
         <div class="text-end">Cartão</div>
       </template>
