@@ -1,5 +1,4 @@
 <template>
-  <div class="text-center mt-5 mb-5">CADASTRAR USO</div>
   <Form />
 </template>
 

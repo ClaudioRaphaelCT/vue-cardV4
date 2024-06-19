@@ -1,5 +1,9 @@
 <template>
+  <v-alert v-show="alertaError" type="error" dismissible class="text-center">
+    Erro ao inserir. Verifique se existe algum campo não preenchido.
+  </v-alert>
   <div>
+    <div class="text-center mt-5 mb-5" v-show="title">CADASTRAR USO</div>
     <v-sheet class="mx-auto mb-4" width="400">
       <v-form @submit.prevent="cadastrar">
         <v-select
@@ -47,12 +51,25 @@ export default {
       },
       responsaveis: ["Rhaíssa", "Raphael", "Ambos"],
       parcelado: false,
+      alertaError: false,
+      title: true,
     };
   },
   methods: {
     async cadastrar() {
-      await cartaoMethods.cadastrar(this, this.newItem, this.parcelado);
-      cartaoMethods.resetForm();
+      if (
+        this.newItem.responsavel == "" ||
+        this.newItem.data == "" ||
+        this.newItem.local == "" ||
+        this.newItem.valor <= 0
+      ) {
+        this.alertaError = true;
+        this.title = false;
+        return;
+      } else {
+        await cartaoMethods.cadastrar(this, this.newItem, this.parcelado);
+        cartaoMethods.resetForm();
+      }
     },
   },
   mixins: [Cartao],
