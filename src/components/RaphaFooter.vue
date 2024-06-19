@@ -19,8 +19,9 @@ export default {
   },
   async created() {
     const totalCartao = await Cartao.methods.getRhaissa("Raphael");
-    this.total = totalCartao.total;
-    this.quantidade = totalCartao.quantidade;
+    const totalAmbos = await Cartao.methods.getRhaissa("Ambos");
+    const totalRaphael = totalAmbos.total / 2 + totalCartao.total;
+    this.total = totalRaphael;
   },
 };
 </script>
