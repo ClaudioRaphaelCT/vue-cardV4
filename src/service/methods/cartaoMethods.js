@@ -18,7 +18,6 @@ export const cartaoMethods = {
     }
     try {
       await contexto.create(newItem);
-      location.reload();
       this.resetForm(contexto);
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
@@ -29,7 +28,6 @@ export const cartaoMethods = {
     try {
       await Cartao.methods.edit(updatedItem.id, updatedItem);
       alert("Atualizado com sucesso!");
-      location.reload();
     } catch (error) {
       console.error("Erro ao atualizar:", error);
       alert("Erro ao atualizar item");
@@ -38,7 +36,6 @@ export const cartaoMethods = {
   async deletar(ids) {
     try {
       await Cartao.methods.delete(ids);
-      location.reload();
     } catch (error) {
       console.error("Erro ao atualizar:", error);
       alert("Erro ao atualizar item");
