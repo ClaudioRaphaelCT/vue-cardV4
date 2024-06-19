@@ -36,6 +36,7 @@ export const cartaoMethods = {
   async deletar(ids) {
     try {
       await Cartao.methods.delete(ids);
+      location.reload();
     } catch (error) {
       console.error("Erro ao atualizar:", error);
       alert("Erro ao atualizar item");
