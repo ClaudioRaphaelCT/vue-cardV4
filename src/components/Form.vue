@@ -19,15 +19,17 @@
           v-model="newItem.data"
         ></v-text-field>
         <v-text-field
+          type="number"
           name="valor"
           label="Valor"
-          v-model="newItem.valor"
+          v-model.number="newItem.valor"
         ></v-text-field>
         <v-checkbox label="Parcelado" v-model="parcelado"></v-checkbox>
         <v-btn block color="primary" dark type="submit">Confirmar</v-btn>
       </v-form>
     </v-sheet>
   </div>
+  <AppFooter />
 </template>
 
 <script>

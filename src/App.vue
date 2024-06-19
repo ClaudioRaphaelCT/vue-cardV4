@@ -3,8 +3,6 @@
     <v-main>
       <Tabs />
     </v-main>
-
-    <AppFooter />
   </v-app>
 </template>
 

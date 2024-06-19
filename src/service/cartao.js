@@ -23,18 +23,19 @@ export const Cartao = {
         const data = doc.data();
         return { id: doc.id, ...data };
       });
-      return all;
+
+      // Calcular o total dos valores e a quantidade de documentos
+      const total = all.reduce((acc, item) => acc + item.valor, 0);
+      const quantidade = all.length;
+
+      return { items: all, total, quantidade };
     },
     async create(newItem) {
-      try {
-        // Formatando a data para dd/MM/yyyy antes de enviar ao Firestore
-        if (newItem.data) {
-          newItem.data = this.formatDate(newItem.data);
-        }
-        await addDoc(collection(db, "cartao"), newItem);
-      } catch (error) {
-        console.log("Error em src/service/cartao", error);
+      // Formatando a data para dd/MM/yyyy antes de enviar ao Firestore
+      if (newItem.data) {
+        newItem.data = this.formatDate(newItem.data);
       }
+      await addDoc(collection(db, "cartao"), newItem);
     },
     async edit(id, updatedItem) {
       const docRef = doc(db, "cartao", id);

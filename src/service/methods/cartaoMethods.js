@@ -19,6 +19,7 @@ export const cartaoMethods = {
     try {
       await contexto.create(newItem);
       alert("Cadastro Realizado!");
+      location.reload();
       this.resetForm(contexto);
     } catch (error) {
       console.error("Erro ao cadastrar:", error);
