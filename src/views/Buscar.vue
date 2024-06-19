@@ -18,55 +18,62 @@
     </v-card-title>
 
     <v-divider></v-divider>
-    <v-data-table v-model:search="search" :items="cartao">
-      <template v-slot:header.stock>
-        <div class="text-end">Cartão</div>
+    <v-data-table :headers="headers" :items="cartao.items" :search="search">
+      <template v-slot:header="{ props }">
+        <thead>
+          <tr>
+            <th
+              v-for="header in props.headers"
+              :key="header.value"
+              class="grey--text"
+            >
+              {{ header.text }}
+            </th>
+          </tr>
+        </thead>
       </template>
 
-      <template v-slot:item.image="{ item }">
-        <v-card class="my-2" elevation="2" rounded>
-          <v-img
-            :src="`https://cdn.vuetifyjs.com/docs/images/graphics/gpus/${item.image}`"
-            height="64"
-            cover
-          ></v-img>
-        </v-card>
-      </template>
-
-      <template v-slot:item.rating="{ item }">
-        <v-rating
-          :model-value="item.rating"
-          color="orange-darken-2"
-          density="compact"
-          size="small"
-          readonly
-        ></v-rating>
-      </template>
-
-      <template v-slot:item.stock="{ item }">
-        <div class="text-end">
-          <v-chip
-            :color="item.stock ? 'green' : 'red'"
-            :text="item.stock ? 'In stock' : 'Out of stock'"
-            class="text-uppercase"
-            size="small"
-            label
-          ></v-chip>
-        </div>
-      </template>
+      <template v-slot:footer.prepend> </template>
     </v-data-table>
   </v-card>
 </template>
+
 <script>
+import { Cartao } from "@/service/cartao";
+
 export default {
   data() {
     return {
       search: "",
       cartao: [],
+      filters: {
+        local: "",
+        data: "",
+        valor: "",
+      },
+      headers: [
+        { text: "Responsável", value: "responsavel", align: "start" },
+        { text: "Local", value: "local", align: "start" },
+        { text: "Data", value: "data", align: "start" },
+        { text: "Valor", value: "valor", align: "end" },
+      ],
     };
   },
   async created() {
     this.cartao = await Cartao.methods.getAll();
   },
+  methods: {
+    async fetchFilteredItems() {
+      const filters = this.filters;
+      this.cartao = await Cartao.methods.getFilteredItems(filters);
+    },
+  },
 };
 </script>
+
+<style scoped>
+thead th {
+  background-color: #808080; /* Gray color */
+  color: white;
+}
+</style>
