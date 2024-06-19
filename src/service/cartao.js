@@ -46,21 +46,19 @@ export const Cartao = {
       await Promise.all(promise);
     },
     async getRhaissa(name) {
-      try {
-        const select = query(
-          collection(db, "cartao"),
-          where("responsavel", "==", name)
-        );
-        const snapShot = await getDocs(select);
-        const results = snapShot.docs.map((doc) => {
-          const data = doc.data();
-          return { id: doc.id, ...data };
-        });
-        return results;
-      } catch (error) {
-        console.error("Error ao buscar itens com responsável Rhaissa:", error);
-        throw error;
-      }
+      const select = query(
+        collection(db, "cartao"),
+        where("responsavel", "==", name)
+      );
+      const snapShot = await getDocs(select);
+      const results = snapShot.docs.map((doc) => {
+        const data = doc.data();
+        return { id: doc.id, ...data };
+      });
+      const total = results.reduce((acc, item) => acc + item.valor, 0);
+      const quantidade = results.length;
+
+      return { items: results, total, quantidade };
     },
   },
 };

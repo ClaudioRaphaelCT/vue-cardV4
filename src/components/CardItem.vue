@@ -48,9 +48,18 @@
       <v-card-title class="text-center">Editar Item</v-card-title>
       <v-card-text>
         <v-form @submit.prevent="salvarEdicao">
+          <v-select
+            v-model="editItem.responsavel"
+            label="Responsavel"
+            :items="responsaveis"
+          ></v-select>
           <v-text-field v-model="editItem.local" label="Local"></v-text-field>
           <v-text-field v-model="editItem.data" label="Data"></v-text-field>
-          <v-text-field v-model="editItem.valor" label="Valor"></v-text-field>
+          <v-text-field
+            type="number"
+            v-model.number="editItem.valor"
+            label="Valor"
+          ></v-text-field>
           <v-checkbox v-model="editParcelado" label="Parcelado"></v-checkbox>
           <v-btn type="submit" color="primary" class="mr-4">Salvar</v-btn>
           <v-btn type="button" color="grey" @click="closeEditDialog"
@@ -77,10 +86,12 @@ export default {
       editDialog: false,
       editItem: {
         id: "",
+        respnsavel: "",
         local: "",
         data: "",
         valor: 0,
       },
+      responsaveis: ["Rhaíssa", "Raphael", "Ambos"],
       editParcelado: false,
       isSelected: false,
     };

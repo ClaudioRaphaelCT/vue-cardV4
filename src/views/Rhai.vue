@@ -10,13 +10,14 @@
     >
     <v-row>
       <CardItem
-        v-for="(user, index) in cartao"
+        v-for="(user, index) in cartao.items"
         :key="index"
         :user="user"
         @selection-change="handleSelectionChange"
       />
     </v-row>
   </v-container>
+  <RhaiFooter />
 </template>
 <script>
 import { Cartao } from "@/service/cartao";
