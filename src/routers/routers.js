@@ -11,7 +11,7 @@ const router = createRouter({
   routes: [
     { path: "/", name: "cartao", component: Cartao },
     { path: "/cadastrar", name: "cadastrar", component: Cadastrar },
-    { path: "/rhai", name: "rhai", component: Rhai },
+    { path: "/rhai", name: "rhai", component: Rhai, ignore: [".*"] },
     { path: "/rapha", name: "rapha", component: Rapha },
     { path: "/ambos", name: "ambos", component: Ambos },
     { path: "/buscar", name: "buscar", component: Buscar },
