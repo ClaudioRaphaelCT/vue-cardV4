@@ -40,6 +40,7 @@ export const Cartao = {
     async edit(id, updatedItem) {
       const docRef = doc(db, "cartao", id);
       await updateDoc(docRef, updatedItem);
+      location.reload();
     },
     async delete(ids) {
       const promise = ids.map((id) => deleteDoc(doc(db, "cartao", id)));
