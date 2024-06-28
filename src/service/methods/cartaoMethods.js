@@ -27,7 +27,7 @@ export const cartaoMethods = {
   async atualizar(updatedItem) {
     try {
       await Cartao.methods.edit(updatedItem.id, updatedItem);
-      alert("Atualizado com sucesso!");
+      location.reload();
     } catch (error) {
       console.error("Erro ao atualizar:", error);
       alert("Erro ao atualizar item");
